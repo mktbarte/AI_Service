@@ -1,0 +1,7 @@
+---
+// A landing é um HTML standalone (tudo embutido). Importamos o arquivo bruto
+// e entregamos como está, sem o Astro processar scripts/estilos internos.
+import landing from '../landing.html?raw';
+export const prerender = true;
+---
+<Fragment set:html={landing} />
