@@ -1,7 +1,13 @@
 ---
 // A landing é um HTML standalone (tudo embutido). Importamos o arquivo bruto
 // e entregamos como está, sem o Astro processar scripts/estilos internos.
+//
+// IMPORTANTE: esta rota NÃO pode ser pré-renderizada. Quando vira um arquivo
+// estático (index.html) na raiz do mount path, a camada de assets do
+// Cloudflare responde 307 /ai-services -> /ai-services/ e o site Webflow
+// responde 301 /ai-services/ -> /ai-services, gerando loop de redirect.
+// Servindo pelo worker (SSR), o Astro responde direto em /ai-services.
 import landing from '../landing.html?raw';
-export const prerender = true;
+export const prerender = false;
 ---
 <Fragment set:html={landing} />
